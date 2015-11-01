@@ -24,4 +24,35 @@ $( "#read" ).click(function() {
 
 $( "#clear" ).click(function() {
 	$("table").empty();
+	$("#graph").empty();
 });
+
+$( "#moveData" ).click(function() {
+	$("#graph").empty();
+		var index = 0;
+		var intervalID = setInterval(function() {
+			console.log(index);
+			var id = "canvas" + index + "";
+			var width = 400/data.length;
+			$( "#graph" ).append( "<canvas id=" + id + " width='" + width + "'' height='400'></canvas>" );
+			var c=document.getElementById(id);
+			var ctx=c.getContext("2d");
+			ctx.rect(2,400-data[index].Count,width - 3,data[index].Count);
+			ctx.stroke();
+			index++;
+			if(index == data.length) {
+				clearInterval(intervalID);
+			}
+		}, 500);
+	// data.forEach( setTimeout(function(element, index, array) {
+	// 	var id = "canvas" + index + "";
+	// 	var width = 400/array.length;
+	// 	$( "#graph" ).append( "<canvas id=" + id + " width='" + width + "'' height='400'></canvas>" );
+	// 	var c=document.getElementById(id);
+	// 	var ctx=c.getContext("2d");
+	// 	ctx.rect(2,400-element.Count,width - 3,element.Count);
+	// 	ctx.stroke();
+	// }, 500));
+});
+
+
