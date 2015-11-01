@@ -11,6 +11,8 @@ var data = [{"JobTitle":"Programmer I","Count":196},
 
 $( "#read" ).click(function() {
 	$("table").empty();
+	$( "table" ).append( "<th>Number of workers in certian job fields</th>" );
+	$( "table" ).append( "<tr><td>" + "Job Title" + "</td><td>" + "Count" + "</td></tr>" );
   data.forEach( function(element, index, array) {
 		//if(index == 1){alert(element.JobTitle)};
 		if(index <= 17){
