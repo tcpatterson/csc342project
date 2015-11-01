@@ -1,59 +1,32 @@
-
 <!DOCTYPE html>
 <html>
-  
   <head>
-    <title>SAS Graph Team 2</title>	
-    <center><h1>SAS Team 2</h1></center>
-    <center><p>Michael MacKrell<br/>Conner Patterson<br/>James Schaefer<br/>Phillip Jones<br/>Jose Chavez</p></center>
-    <br/>
-    <br/>
+    <title>SAS Graph Team 2</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   </head>
-  
-  
 	<body>
-      
-      
-      
-      <div class="images">
-       
-        <table id="dataimage" style=";width:400px;border:2px solid black;float:left; margin-right:500px; margin-left:120px">
-
-          <td height="400px"></td>
-          
-          
+    <div id="header">
+      <h1>SAS Team 2</h1>
+      <p>Michael MacKrell, Connor Patterson, James Schaefer, Phillip Jones, Jose Chavez</p>
+    </div>
+    <div class="charts">
+      <div id="data">
+        <table>
         </table>
-        
-        <table id="graphimage" style=";width:400px;border:2px solid black;" >
-
-          <td height="400px"></td>
-          
-        </table>
-               
       </div>
-      
-      <br/>  <br/>    
-      
-      
-      <div class="buttons" >
-        
-        <button type="button" id="read" style="float:left;height:40px;margin-right:0">Read Data</button>
-        
-        <button type="button" id="moveData" style="height:40px;margin:auto;margin-left:675px">Move Data</button>
-       
-        <button type="button" id="clear" style="height:40px;float:right">Clear</button>
-       
-        
-         <br/>  <br/>  
-      </div>
-      
-      
-      <div class="victory">
-        <center>
-        <button type="button" id="weHaveAWinner"  style="height:40px;" >Press When Complete</button>
-          </center>
-      </div>
-      
-    
+      <div id="graph"></div>
+    </div>
+    <div class="buttons">
+      <button type="button" id="read">Read Data</button>
+      <button type="button" id="moveData">Move Data</button>
+      <button type="button" id="clear">Clear</button>
+    </div>
+    <div class="victory">
+      <center>
+        <button type="button" id="weHaveAWinner">Press When Complete</button>
+      </center>
+    </div>
+    <script src="scripts.js"></script>
 	</body>
 </html>
