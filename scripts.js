@@ -12,7 +12,7 @@ var data = [{"JobTitle":"Programmer I","Count":196},
 $( "#read" ).click(function() {
 	$("table").empty();
 	$( "table" ).append( "<th>Number of workers in certian job fields</th>" );
-	$( "table" ).append( "<tr><td>" + "Job Title" + "</td><td>" + "Count" + "</td></tr>" );
+	$( "table" ).append( "<tr><td>" + "<u>Job Title</u>" + "</td><td>" + "<u>Count</u>" + "</td></tr>" );
   data.forEach( function(element, index, array) {
 		//if(index == 1){alert(element.JobTitle)};
 		if(index <= 17){
@@ -27,9 +27,21 @@ $( "#clear" ).click(function() {
 	$("#graph").empty();
 });
 
+// Enter data for x-axis of bar graph
+var data2 = [{"JobTitle2":"Prog I"},
+             {"JobTitle2":"CE"},
+             {"JobTitle2":"SE IV"},
+             {"JobTitle2":"WD III"},
+             {"JobTitle2":"HRM"},
+             {"JobTitle2":"HDT"}];
+
 $( "#moveData" ).click(function() {
 	$("#graph").empty();
 		var index = 0;
+  		var max = data[0].Count;
+        for (var i = 0; i < data2.length; i++){
+          if (data[i].Count > max) max = data[i].Count;
+        }
 		var intervalID = setInterval(function() {
 			console.log(index);
 			var id = "canvas" + index + "";
@@ -37,22 +49,24 @@ $( "#moveData" ).click(function() {
 			$( "#graph" ).append( "<canvas id=" + id + " width='" + width + "'' height='400'></canvas>" );
 			var c=document.getElementById(id);
 			var ctx=c.getContext("2d");
-			ctx.rect(2,400-data[index].Count,width - 3,data[index].Count);
+          	ctx.rect(2,400-(data[index].Count/max*375),width - 3,(data[index].Count/max*375) - 50);
+			//ctx.strokeText(data2[index].JobTitle2, 400/(2*data2.length), 375);
+          	ctx.textAlign = "center";   
+          	ctx.font= 'bold 15px Arial';
+          	ctx.fillText(data2[index].JobTitle2, 400/(2*data2.length), 375); 
+          	ctx.textAlign="center";
 			ctx.stroke();
 			index++;
 			if(index == data.length) {
 				clearInterval(intervalID);
 			}
 		}, 500);
-	// data.forEach( setTimeout(function(element, index, array) {
-	// 	var id = "canvas" + index + "";
-	// 	var width = 400/array.length;
-	// 	$( "#graph" ).append( "<canvas id=" + id + " width='" + width + "'' height='400'></canvas>" );
-	// 	var c=document.getElementById(id);
-	// 	var ctx=c.getContext("2d");
-	// 	ctx.rect(2,400-element.Count,width - 3,element.Count);
-	// 	ctx.stroke();
-	// }, 500));
+  		// Start inserting x-axis data
+  		data2.forEach( function(element, index, array) {
+		//if(index == 1){alert(element.JobTitle)};
+		if(index <= 17){
+			var string = "<tr><td>" + element.JobTitle + "</td><td>" + element.Count + "</td></tr>"
+			$( "graph" ).append(string);
+		};
+	});
 });
-
-
