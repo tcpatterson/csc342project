@@ -38,11 +38,11 @@ var data2 = [{"JobTitle2":"Prog I"},
 $( "#moveData" ).click(function() {
 	$("#graph").empty();
 	var randColor;
-	var width = 400/data2.length;
+	var width = (400/data2.length) - 2;
 	data2.forEach( function(element, index, array) {
 		var height = data[index].Count;
 		var top = 400 - height;
-		$( "#graph" ).append( "<div class='bar' style='width:"+width+"px; margin-top:"+top+"px; background-color:red;'></div>" );
+		$( "#graph" ).append( "<div class='bar' style='width:"+width+"px; margin-top:"+top+"px; background-color:#BDBDBD; border:1px solid black'></div>" );
 		$(".bar:nth-child("+(index+1)+")").animate({ height: "" + height + "px"}, 1000);
 	});
 });
