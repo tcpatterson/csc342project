@@ -17,6 +17,11 @@
   display: inline-block;
 }
 
+.lines {
+  position: relative;
+  float: left;
+  display: inline-block;
+}
 .charts {
   width: 848px;
   height: 400px;
