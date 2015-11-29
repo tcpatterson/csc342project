@@ -35,14 +35,28 @@ var data2 = [{"JobTitle2":"Prog I"},
              {"JobTitle2":"HRM"},
              {"JobTitle2":"HDT"}];
 
+     
 $( "#moveData" ).click(function() {
+    
 	$("#graph").empty();
+  
+    var index = 0;
 	var randColor;
 	var width = (400/data2.length) - 2;
-	data2.forEach( function(element, index, array) {
+  
+    var intervalID = setInterval(function() {
 		var height = data[index].Count;
 		var top = 400 - height;
-		$( "#graph" ).append( "<div class='bar' style='width:"+width+"px; margin-top:"+top+"px; background-color:#BDBDBD; border:1px solid black'></div>" );
-		$(".bar:nth-child("+(index+1)+")").animate({ height: "" + height + "px"}, 1000);
+     
+      $( "#graph" ).append( "<div class='bar' style='width:"+width+"px; margin-top:"+top+"px; background-color:#BDBDBD; border:1px solid black'></div>" );
+      $(".bar:nth-child("+(index+1)+")").animate({ height: "" + height + "px"}, 1000);
+        index++;
+     
+        if(index == data.length) {
+	  clearInterval(intervalID);
+	 }
+      
+      }, 800);
+     
+		
 	});
-});
