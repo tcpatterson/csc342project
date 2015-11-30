@@ -16,7 +16,7 @@ $( "#read" ).click(function() {
   data.forEach( function(element, index, array) {
 		//if(index == 1){alert(element.JobTitle)};
 		if(index <= 17){
-			var string = "<tr><td>" + element.JobTitle + "</td><td>" + element.Count + "</td></tr>";
+			var string = "<tr><td>" + element.JobTitle + "</td><td class='barCount'>" + element.Count + "</td></tr>";
 			$( "table" ).append(string);
 
 		};
@@ -37,39 +37,35 @@ var data2 = [{"JobTitle2":"Prog I"},
              {"JobTitle2":"HDT"}];
   
 $( "#moveData" ).click(function() {
-
 	$("#graph").empty();
-  
-    var index = 0;
+  var index = 0;
 	var randColor;
-
-    var intervalID2 = setInterval(function() {
-        var width = (400/data2.length) - 2;
-		var height = data[index].Count;
-		var top = 400 - height;
-
-      $( "table" ).append( "<div class='lines' style='width: 2 px; margin-top: -180px;  background-color:#BDBDBD; border:1px solid black'></div>" );  
-      
-      $(".lines:nth-child("+(index+3)+")").animate({
-            left: '421px',
-            opacity: '0.5',
-            width: width ,
-            "margin-top": top - 177,
-            height: height
-            
-        }, 800);
-  
-      $( "#graph" ).append( "<div class='bar' style='width:"+width+"px; margin-top:"+top+"px; background-color:#BDBDBD; border:1px solid black'></div>" );
-
-       $(".bar:nth-child("+(index+1)+")").animate({ height: "" + height + "px"}, 800);
-
-        if(index == data.length) {
-				clearInterval(intervalID2);
-			}
-      
-        index++;
-      
-      }, 800);
-     
-		
-	});
+  var intervalID2 = setInterval(function() {
+    var width = (400/data2.length) - 2;
+    var height = data[index].Count;
+    var top = 400 - height;
+    $( "table" ).append( "<div class='lines' style='width: 2 px; margin-top: -180px;  background-color:#BDBDBD; border:1px solid black'></div>" );  
+    $(".lines:nth-child("+(index+3)+")").animate({
+      left: '421px',
+      opacity: '0.5',
+      width: width ,
+      "margin-top": top - 177,
+      height: height
+    },{duration:1000,
+      start: function() {
+        console.log('start', index);
+        $("tr:nth-child("+(index+2)+") .barCount").css('font-weight', 'bold');
+      },
+      done: function(){
+        console.log('end', index);
+        $("tr:nth-child("+(index+0)+") .barCount").css('font-weight', '');
+      }
+    });
+    $( "#graph" ).append( "<div class='bar' style='width:"+width+"px; margin-top:"+top+"px; background-color:#BDBDBD; border:1px solid black'></div>" );
+    $(".bar:nth-child("+(index+1)+")").animate({ height: "" + height + "px"}, 800);
+    if(index == data.length) {
+			clearInterval(intervalID2);
+		}
+    index++;
+  }, 800);	
+});
