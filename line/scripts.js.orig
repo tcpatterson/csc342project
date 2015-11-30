@@ -16,7 +16,7 @@ $( "#read" ).click(function() {
   data.forEach( function(element, index, array) {
 		//if(index == 1){alert(element.JobTitle)};
 		if(index <= 17){
-			var string = "<tr><td>" + element.JobTitle + "</td><td>" + element.Count + "</td></tr>";
+			var string = "<tr><td>" + element.JobTitle + "</td><td class='barCount'>" + element.Count + "</td></tr>";
 			$( "table" ).append(string);
 
 		};
@@ -42,6 +42,31 @@ $( "#moveData" ).click(function() {
   
     var index = 0;
 	var randColor;
+<<<<<<< HEAD
+	var width = 400/data2.length;
+	var index = 0;
+	var intervalID = setInterval(function() {
+		var height = data[index].Count;
+		var top = 400 - height;
+		$( "#graph" ).append( "<div class='bar' style='width:"+width+"px; margin-top:"+top+"px; background-color:red;'></div>" );
+		$(".bar:nth-child("+(index+1)+")").animate({ height: "" + height + "px"}, 
+			{duration:1000, 
+			start: function() {
+				console.log('start', index);
+				$("tr:nth-child("+(index+2)+") .barCount").css('font-weight', 'bold');
+			}, 
+			done: function(){
+				console.log('end', index);
+				$("tr:nth-child("+(index+0)+") .barCount").css('font-weight', '');
+			}
+		});
+		index++;
+		if(index == data.length) {
+			clearInterval(intervalID);
+		}
+	}, 1000);
+});
+=======
 
     var intervalID2 = setInterval(function() {
         var width = (400/data2.length) - 2;
@@ -73,3 +98,4 @@ $( "#moveData" ).click(function() {
      
 		
 	});
+>>>>>>> 4d52d67ad43087f0b72eb780e8725f43f06e84ca
