@@ -36,12 +36,12 @@ $( "#moveData" ).click(function() {
   var width = 400/data.length;
   var margin = (width-7)/2;
   data.forEach( function(element, index, array) {
-    $( "#graph" ).append( "<div class='dots' style='margin-left:"+margin+"px;margin-right:"+margin+"px;width:5px;height:5px;background-color:black;border:1px solid gray; margin-top:394px;'></div>" );
+    $( "#graph" ).append( "<div class='dots' style='margin-left:"+margin+"px;margin-right:"+margin+"px;width:5px;height:5px;background-color:black;border:1px solid gray; top:394px;'></div>" );
   })
   var intervalID2 = setInterval(function() {
     var top = 400 - (data[index].Count * (multiplier-1));
     $(".dots:nth-child("+(index+1)+")").animate({
-      "margin-top": top,
+      "top": top,
     },{duration:1000,
       start: function() {
         console.log('start', index);
@@ -49,26 +49,42 @@ $( "#moveData" ).click(function() {
       },
       done: function(){
         console.log('end', index);
+        if(index == data.length) {
+          drawLines();
+        }
         $("tr:nth-child("+(index+0)+") .barCount").css('font-weight', '');
       }
     });
-    var dotStart = $(".dots:nth-child("+(index+1)+")");
-    var positionStart = dotStart.position();
-    var dotEnd = $(".dots:nth-child("+(index+2)+")");
-    var positionEnd = dotEnd.position();
-    console.log(positionStart);
-    console.log(positionEnd);
-    if(index < 6){
-      createLine(positionStart.left, positionStart.top, positionEnd.left, positionEnd.top);
-    }
     console.log(index, data.length);
     if(index == data.length-1) {
       console.log("cleared");
 			clearInterval(intervalID2);
 		}
     index++;
-  }, 800);	
+  }, 800);
 });
+
+function drawLines(){
+  var index2 = 0;
+  var width = 400/data.length;
+  var margin = (width-7)/2;
+  var intervalID3 = setInterval(function() {
+    var dotStart = $(".dots:nth-child("+(index2+1)+")");
+    var positionStart = dotStart.position();
+    var dotEnd = $(".dots:nth-child("+(index2)+")");
+    var positionEnd = dotEnd.position();
+    console.log(positionStart);
+    console.log(positionEnd);
+    if(index2 > 0){
+      createLine(positionStart.left+margin+2, positionStart.top, positionEnd.left+margin+2, positionEnd.top);
+    }
+    if(index2 == data.length-1) {
+      console.log("cleared");
+      clearInterval(intervalID3);
+    }
+    index2++;
+  }, 200);
+}
 
 //http://www.monkeyandcrow.com/blog/drawing_lines_with_css3/
 function createLine(x1,y1, x2,y2){
