@@ -19,13 +19,14 @@ $( "#read" ).click(function() {
 			var string = "<tr><td>" + element.JobTitle + "</td><td class='barCount'>" + element.Count + "</td></tr>";
 			$( "table" ).append(string);
 
-		};
+		}
 	});
 });
 
 $( "#clear" ).click(function() {
 	$("table").empty();
 	$("#graph").empty();
+  	$("#ghost").empty();
 });
 
 // Enter data for x-axis of bar graph
@@ -35,20 +36,21 @@ var data2 = [{"JobTitle2":"Prog I"},
              {"JobTitle2":"WD III"},
              {"JobTitle2":"HRM"},
              {"JobTitle2":"HDT"}];
-  
 $( "#moveData" ).click(function() {
 	$("#graph").empty();
   var index = 0;
 	var randColor;
+  var width;
+  //$( "table" ).append( "<div class='lines' style='height: 400px; width: 400 px; background-color:#ffffff; border:0px solid black'></div>" );
   var intervalID2 = setInterval(function() {
-    var width = (400/data2.length) - 2;
+    width = (400/data2.length) - 2;
     var height = data[index].Count;
     var top = 400 - height;
-    $( "table" ).append( "<div class='lines' style='width: 2 px; margin-top: -180px;  background-color:#BDBDBD; border:1px solid black'></div>" );  
-    $(".lines:nth-child("+(index+3)+")").animate({
-      left: '421px',
+    $( "#ghost" ).append( "<div class='lines' style='width: 2 px; margin-top: -180px;  background-color:#BDBDBD; border:1px solid black'></div>" );  
+    $(".lines:nth-child("+(index+1)+")").animate({
+      left: '423px',
       opacity: '0.5',
-      width: width ,
+      width: width,
       "margin-top": top - 177,
       height: height
     },{duration:1000,
@@ -63,9 +65,10 @@ $( "#moveData" ).click(function() {
     });
     $( "#graph" ).append( "<div class='bar' style='width:"+width+"px; margin-top:"+top+"px; background-color:#BDBDBD; border:1px solid black'></div>" );
     $(".bar:nth-child("+(index+1)+")").animate({ height: "" + height + "px"}, 800);
-    if(index == data.length) {
-			clearInterval(intervalID2);
-		}
+    if(index >= data.length) {
+        console.log("exiting loop");
+		clearInterval(intervalID2);
+	}
     index++;
-  }, 800);	
+  }, 800);
 });
