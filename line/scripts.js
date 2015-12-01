@@ -19,13 +19,14 @@ $( "#read" ).click(function() {
 			var string = "<tr><td>" + element.JobTitle + "</td><td class='barCount'>" + element.Count + "</td></tr>";
 			$( "table" ).append(string);
 
-		};
+		}
 	});
 });
 
 $( "#clear" ).click(function() {
 	$("table").empty();
 	$("#graph").empty();
+  	$("#ghost").empty();
 });
 
 // Enter data for x-axis of bar graph
@@ -35,20 +36,29 @@ var data2 = [{"JobTitle2":"Prog I"},
              {"JobTitle2":"WD III"},
              {"JobTitle2":"HRM"},
              {"JobTitle2":"HDT"}];
-  
 $( "#moveData" ).click(function() {
-	$("#graph").empty();
+  $("#graph").empty();
   var index = 0;
-	var randColor;
+  var max = data[0].Count;
+  for (var i = 0; i < data2.length; i++){
+    if (data[i].Count > max) max = data[i].Count;
+  }
+  var scale = 400/max;
+  $( "#graph" ).append( "<div id='yaxis' style='width: 20px; height: 400px'></div>" );
+  var piece = max / 5;
+  for (var q = 5; q >= 0; q--){
+    $("#yaxis").append("<div id='y' style='width: 20px; height: 80px'>" + q*piece + "</div>");
+  }
+  var width;
   var intervalID2 = setInterval(function() {
-    var width = (400/data2.length) - 2;
-    var height = data[index].Count;
+    width = ((400 - 20)/data2.length) - 2;
+    var height = data[index].Count * scale;
     var top = 400 - height;
-    $( "table" ).append( "<div class='lines' style='width: 2 px; margin-top: -180px;  background-color:#BDBDBD; border:1px solid black'></div>" );  
-    $(".lines:nth-child("+(index+3)+")").animate({
-      left: '421px',
+    $( "#ghost" ).append( "<div class='lines' style='width: 2 px; margin-top: -180px;  background-color:#BDBDBD; border:1px solid black'></div>" );  
+    $(".lines:nth-child("+(index+1)+")").animate({
+      left: '443px',
       opacity: '0.5',
-      width: width ,
+      width: width,
       "margin-top": top - 177,
       height: height
     },{duration:1000,
@@ -61,11 +71,12 @@ $( "#moveData" ).click(function() {
         $("tr:nth-child("+(index+0)+") .barCount").css('font-weight', '');
       }
     });
-    $( "#graph" ).append( "<div class='bar' style='width:"+width+"px; margin-top:"+top+"px; background-color:#BDBDBD; border:1px solid black'></div>" );
-    $(".bar:nth-child("+(index+1)+")").animate({ height: "" + height + "px"}, 800);
-    if(index == data.length) {
-			clearInterval(intervalID2);
-		}
+    $( "#graph" ).append( "<div class='bar' style='width:"+width+"px; margin-top:"+top+"px; background-color:#BDBDBD; border:1px solid black'>" + data2[index].JobTitle2 + "</div>" );
+    $(".bar:nth-child("+(index+2)+")").animate({ height: "" + height + "px"}, 800);
+    if(index >= data.length) {
+        console.log("exiting loop");
+		clearInterval(intervalID2);
+	}
     index++;
-  }, 800);	
+  }, 800);
 });
