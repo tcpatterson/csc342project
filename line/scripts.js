@@ -56,7 +56,7 @@ $( "#moveData" ).click(function() {
     var top = 400 - height;
     $( "#ghost" ).append( "<div class='lines' style='width: 2 px; margin-top: -180px;  background-color:#BDBDBD; border:1px solid black'></div>" );  
     $(".lines:nth-child("+(index+1)+")").animate({
-      left: '443px',
+      left: '449px',
       opacity: '0.5',
       width: width,
       "margin-top": top - 177,
