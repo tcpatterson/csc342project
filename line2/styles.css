@@ -19,6 +19,8 @@ div.line {
   position: relative;
   float: left;
   display: inline-block;
+  color:  red;
+  z-index: 1000;
 }
 .charts {
   width: 860px;
