@@ -21,7 +21,7 @@
   display: inline-block;
 }
 .charts {
-  width: 848px;
+  width: 860px;
   height: 400px;
   margin: 0 auto;
 }
@@ -32,9 +32,10 @@
   display: inline;
   width: 400px;
   height: 400px;
-  border: 2px solid black;
+  border: 5px ridge #BDBDBD;
   float: left;
 }
+
 
 .buttons {
   width: 346px;

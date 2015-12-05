@@ -55,26 +55,15 @@ $( "#moveData" ).click(function() {
     var height = data[index].Count * scale;
     var top = 400 - height;
     $( "#ghost" ).append( "<div class='lines' style='width: 2 px; margin-top: -180px;  background-color:#BDBDBD; border:1px solid black'></div>" );  
-    $(".lines:nth-child("+(index+1)+")").animate({
-      left: '443px',
-      opacity: '0.5',
-      width: width,
-      "margin-top": top - 177,
-      height: height
-    },{duration:1000,
-      start: function() {
-        console.log('start', index);
-        $("tr:nth-child("+(index+2)+") .barCount").css('font-weight', 'bold');
-      },
-      done: function(){
-        console.log('end', index);
-        $("tr:nth-child("+(index+0)+") .barCount").css('font-weight', '');
-      }
-    });
+   
     $( "#graph" ).append( "<div class='bar' style='width:"+width+"px; margin-top:"+top+"px; background-color:#BDBDBD; border:1px solid black'>" + data2[index].JobTitle2 + "</div>" );
     $(".bar:nth-child("+(index+2)+")").animate({ height: "" + height + "px"}, 800);
+     $("tr:nth-child("+(index+2)+") .barCount").css('font-weight', 'bold');
+    
+     $("tr:nth-child("+(index+1)+") .barCount").css('font-weight', '');
     if(index >= data.length) {
         console.log("exiting loop");
+       
 		clearInterval(intervalID2);
 	}
     index++;
