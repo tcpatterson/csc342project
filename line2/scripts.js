@@ -33,7 +33,7 @@ $( "#moveData" ).click(function() {
 	$("#graph").empty();
   var multiplier = 400/12;
   var index = 0;
-  var width = 400/data.length;
+  var width = parseInt($("#graph").css("width"), 10)/data.length;
   var leftmargin = 2*(width-7)/3;
   var rightmargin = (width -7)/3;
   data.forEach( function(element, index, array) {
@@ -78,7 +78,7 @@ $( "#moveData" ).click(function() {
 
 function drawLines(){
   var index2 = 0;
-  var width = 400/data.length;
+  var width = parseInt($("#graph").css("width"), 10)/data.length;
   var leftmargin = 2*(width-7)/3;
   var rightmargin = (width-7)/3;
   var intervalID3 = setInterval(function() {
@@ -117,3 +117,12 @@ function createLine(x1,y1, x2,y2){
     .offset({left: x1, top: y1});
   return line;
 }
+$("#changeWidth").click(function() {
+  var newWidth = parseInt($("#width").val(), 10);
+  console.log($("#width").val());
+  if (newWidth > 10 && newWidth < 10000) {
+    $("#graph").empty();
+    $("#graph").css("width", newWidth + "px");
+    $(".charts").css("width", (newWidth + 460) + "px");
+  }
+});
