@@ -2,7 +2,7 @@ $( "#weHaveAWinner" ).click(function() {
   alert( "Money falling from the sky." );
 });
 
-var data = [{"JobTitle":"Monday I","Count":12},
+var data = [{"JobTitle":"Monday","Count":12},
 {"JobTitle":"Tuesday","Count":6},
 {"JobTitle":"Wednesday","Count":8},
 {"JobTitle":"Thursday","Count":9},
@@ -34,14 +34,26 @@ $( "#moveData" ).click(function() {
   var multiplier = 400/12;
   var index = 0;
   var width = 400/data.length;
-  var margin = (width-7)/2;
+  var leftmargin = 2*(width-7)/3;
+  var rightmargin = (width -7)/3;
   data.forEach( function(element, index, array) {
-    $( "#graph" ).append( "<div class='dots' style='margin-left:"+margin+"px;margin-right:"+margin+"px;width:5px;height:5px;background-color:black;border:1px solid gray; top:394px;'></div>" );
-  })
+    $( "#graph" ).append( "<div class='dots' style='margin-left:"+leftmargin+"px;margin-right:"+rightmargin+"px;width:5px;height:5px;background-color:black;border:1px solid gray; top:394px;'>&nbsp;&nbsp;" + element.JobTitle.substring(0, 2) + "</div>" );
+  });
+  
+  var max = data[0].Count;
+  for (var i = 0; i < data.length; i++){
+    if (data[i].Count > max) max = data[i].Count;
+  }
+  var scale = 400/max;
+  $( "#graph" ).append( "<div id='yaxis' style='width: 20px; height: 400px'></div>" );
+  var piece = max / 5;
+  for (var q = 5; q >= 0; q--){
+    $("#yaxis").append("<div id='y' style='width: 20px; height: 80px'>" + (q*piece).toFixed(2) + "</div>");
+  }
   var intervalID2 = setInterval(function() {
     var top = 400 - (data[index].Count * (multiplier-1));
     $(".dots:nth-child("+(index+1)+")").animate({
-      "top": top,
+      "top": top
     },{duration:1000,
       start: function() {
         console.log('start', index);
@@ -67,7 +79,8 @@ $( "#moveData" ).click(function() {
 function drawLines(){
   var index2 = 0;
   var width = 400/data.length;
-  var margin = (width-7)/2;
+  var leftmargin = 2*(width-7)/3;
+  var rightmargin = (width-7)/3;
   var intervalID3 = setInterval(function() {
     var dotStart = $(".dots:nth-child("+(index2+1)+")");
     var positionStart = dotStart.position();
@@ -76,7 +89,7 @@ function drawLines(){
     console.log(positionStart);
     console.log(positionEnd);
     if(index2 > 0){
-      createLine(positionStart.left+margin+2, positionStart.top, positionEnd.left+margin+2, positionEnd.top);
+      createLine(positionStart.left+leftmargin+2, positionStart.top, positionEnd.left+leftmargin+2, positionEnd.top);
     }
     if(index2 == data.length-1) {
       console.log("cleared");
@@ -103,4 +116,4 @@ function createLine(x1,y1, x2,y2){
     .width(length)
     .offset({left: x1, top: y1});
   return line;
-};
+}
