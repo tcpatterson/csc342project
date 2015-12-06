@@ -151,7 +151,7 @@ function resizeBar() {
 
 function genBarChart() {
   var data = barData;
-  var data2 = barData2;
+  var data2 = barData;
   $("#graph").empty();
   var index = 0;
   var max = data[0].Value;
@@ -249,8 +249,8 @@ function genLineChart() {
     console.log(index, data.length);
     if(index == data.length-1) {
       console.log("cleared");
-			clearInterval(intervalID2);
-		}
+      clearInterval(intervalID2);
+    }
     index++;
   }, 800);
 }
@@ -298,6 +298,7 @@ function draw() {
 }
 
 function drawLines(){
+  var data = lineData;
   var index2 = 0;
   var width = parseInt($("#graph").css("width"), 10)/data.length;
   var leftmargin = 2*(width-7)/3;
@@ -307,8 +308,10 @@ function drawLines(){
     var positionStart = dotStart.position();
     var dotEnd = $(".dots:nth-child("+(index2)+")");
     var positionEnd = dotEnd.position();
-    console.log(positionStart);
-    console.log(positionEnd);
+    console.log("ind2", index2);
+    console.log("start", positionStart);
+    console.log("end", positionEnd);
+    console.log("lm", leftmargin);
     if(index2 > 0){
       createLine(positionStart.left+leftmargin+2, positionStart.top, positionEnd.left+leftmargin+2, positionEnd.top);
     }
