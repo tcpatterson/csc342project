@@ -3,6 +3,7 @@ $( "#read" ).on('click', readLineData);
 $( "#clear" ).on('click', clearLine);
 $( "#genChart" ).on('click', genLineChart);
 $("#bar").click(function(){
+  $('#changeWidth').removeClass('hide');
   $( "#read" ).unbind();
   $( "#clear" ).unbind();
   $( "#genChart" ).unbind();
@@ -11,6 +12,7 @@ $("#bar").click(function(){
   $( "#genChart" ).on('click', genBarChart);
 })
 $("#line").click(function(){
+  $('#changeWidth').removeClass('hide');
   $( "#read" ).unbind();
   $( "#clear" ).unbind();
   $( "#genChart" ).unbind();
@@ -19,6 +21,7 @@ $("#line").click(function(){
   $( "#genChart" ).on('click', genLineChart);
 })
 $("#pie").click(function(){
+  $('#changeWidth').addClass('hide');
   $( "#read" ).unbind();
   $( "#clear" ).unbind();
   $( "#genChart" ).unbind();

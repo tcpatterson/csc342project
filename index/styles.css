@@ -3,6 +3,10 @@
   margin-bottom: 50px;
 }
 
+.hide {
+  display: none;
+}
+
 #sidebar {
   width: 150px;
   height: 1000px;
