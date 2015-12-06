@@ -74,9 +74,12 @@ $("#changeWidth").click(function() {
   var newWidth = parseInt($("#width").val(), 10);
   console.log($("#width").val());
   if (newWidth > 10 && newWidth < 10000) {
-    var change =  {'width' : (((newWidth - 20)/data.length) - 2)};
-    $(".bar").animate(change, 1000, function(){});
-    $("#graph").css("width", newWidth + "px");
-    $(".charts").css("width", (newWidth + 460) + "px");
+    var changeBar =  {'width' : (((newWidth - 20)/data.length) - 2)};
+    var changeGraph =  {'width' : newWidth};
+    var changeCharts =  {'width' : (newWidth + 460)};
+    $(".bar").animate(changeBar, 1000, function(){});
+    $("#graph").animate(changeGraph, 1000, function(){});
+    $(".charts").animate(changeCharts, 1000, function(){});
+    //.delay(2000).css("width", (newWidth + 460) + "px");
   }
 });
