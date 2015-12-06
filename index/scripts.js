@@ -179,12 +179,13 @@ function genBarChart() {
      $("tr:nth-child("+(index+2)+") .barCount").css('font-weight', 'bold');
     
      $("tr:nth-child("+(index+1)+") .barCount").css('font-weight', '');
+    index++;
     if(index >= data.length) {
         console.log("exiting loop");
        
 		clearInterval(intervalID2);
 	}
-    index++;
+    
   }, 800);
 }
 
