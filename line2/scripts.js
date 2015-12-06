@@ -2,22 +2,22 @@ $( "#weHaveAWinner" ).click(function() {
   alert( "Money falling from the sky." );
 });
 
-var data = [{"JobTitle":"Monday","Count":12},
-{"JobTitle":"Tuesday","Count":6},
-{"JobTitle":"Wednesday","Count":8},
-{"JobTitle":"Thursday","Count":9},
-{"JobTitle":"Friday","Count":6},
-{"JobTitle":"Saturday","Count":11},
-{"JobTitle":"Sunday","Count":9}];
+var data = [{"Key":"Monday","Value":12},
+{"Key":"Tuesday","Value":6},
+{"Key":"Wednesday","Value":8},
+{"Key":"Thursday","Value":9},
+{"Key":"Friday","Value":6},
+{"Key":"Saturday","Value":11},
+{"Key":"Sunday","Value":9}];
 
 $( "#read" ).click(function() {
 	$("table").empty();
 	$( "table" ).append( "<th>Number of inches of rain per day</th>" );
 	$( "table" ).append( "<tr><td>" + "<u>Day</u>" + "</td><td>" + "<u>Inches</u>" + "</td></tr>" );
   data.forEach( function(element, index, array) {
-		//if(index == 1){alert(element.JobTitle)};
+		//if(index == 1){alert(element.Key)};
 		if(index <= 17){
-			var string = "<tr><td>" + element.JobTitle + "</td><td class='barCount'>" + element.Count + "</td></tr>";
+			var string = "<tr><td>" + element.Key + "</td><td class='barValue'>" + element.Value + "</td></tr>";
 			$( "table" ).append(string);
 
 		};
@@ -37,12 +37,12 @@ $( "#moveData" ).click(function() {
   var leftmargin = 2*(width-7)/3;
   var rightmargin = (width -7)/3;
   data.forEach( function(element, index, array) {
-    $( "#graph" ).append( "<div class='dots' style='margin-left:"+leftmargin+"px;margin-right:"+rightmargin+"px;width:5px;height:5px;background-color:black;border:1px solid gray; top:394px;'>&nbsp;&nbsp;" + element.JobTitle.substring(0, 2) + "</div>" );
+    $( "#graph" ).append( "<div class='dots' style='margin-left:"+leftmargin+"px;margin-right:"+rightmargin+"px;width:5px;height:5px;background-color:black;border:1px solid gray; top:394px;'>&nbsp;&nbsp;" + element.Key.substring(0, 2) + "</div>" );
   });
   
-  var max = data[0].Count;
+  var max = data[0].Value;
   for (var i = 0; i < data.length; i++){
-    if (data[i].Count > max) max = data[i].Count;
+    if (data[i].Value > max) max = data[i].Value;
   }
   var scale = 400/max;
   $( "#graph" ).append( "<div id='yaxis' style='width: 20px; height: 400px'></div>" );
@@ -51,20 +51,20 @@ $( "#moveData" ).click(function() {
     $("#yaxis").append("<div id='y' style='width: 20px; height: 80px'>" + (q*piece).toFixed(2) + "</div>");
   }
   var intervalID2 = setInterval(function() {
-    var top = 400 - (data[index].Count * (multiplier-1));
+    var top = 400 - (data[index].Value * (multiplier-1));
     $(".dots:nth-child("+(index+1)+")").animate({
       "top": top
     },{duration:1000,
       start: function() {
         console.log('start', index);
-        $("tr:nth-child("+(index+2)+") .barCount").css('font-weight', 'bold');
+        $("tr:nth-child("+(index+2)+") .barValue").css('font-weight', 'bold');
       },
       done: function(){
         console.log('end', index);
         if(index == data.length) {
           drawLines();
         }
-        $("tr:nth-child("+(index+0)+") .barCount").css('font-weight', '');
+        $("tr:nth-child("+(index+0)+") .barValue").css('font-weight', '');
       }
     });
     console.log(index, data.length);
