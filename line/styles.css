@@ -63,3 +63,6 @@ button {
 #changeWidth {
   margin: 0px;
 }
+#data {
+  overflow-y: auto;
+}
