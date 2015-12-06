@@ -110,9 +110,9 @@ function genBarChart() {
   var data2 = barData2;
   $("#graph").empty();
   var index = 0;
-  var max = data[0].Count;
-  for (var i = 0; i < data2.length; i++){
-    if (data[i].Count > max) max = data[i].Count;
+  var max = data[0].Value;
+  for (var i = 0; i < data.length; i++){
+    if (data[i].Value > max) max = data[i].Value;
   }
   var scale = 400/max;
   $( "#graph" ).append( "<div id='yaxis' style='width: 20px; height: 400px'></div>" );
@@ -122,12 +122,15 @@ function genBarChart() {
   }
   var width;
   var intervalID2 = setInterval(function() {
-    width = ((400 - 20)/data2.length) - 2;
-    var height = data[index].Count * scale;
+    width = ((parseInt($("#graph").css("width"), 10) - 20)/data.length) - 2;
+    var height = data[index].Value * scale;
     var top = 400 - height;
+    var abbreviation = "";
+    var split = data[index].Key.split(" ");
+    for (var q = 0; q < split.length; q++) abbreviation += split[q].charAt(0);
     $( "#ghost" ).append( "<div class='lines' style='width: 2 px; margin-top: -180px;  background-color:#BDBDBD; border:1px solid black'></div>" );  
    
-    $( "#graph" ).append( "<div class='bar' style='width:"+width+"px; margin-top:"+top+"px; background-color:#BDBDBD; border:1px solid black'>" + data2[index].JobTitle2 + "</div>" );
+    $( "#graph" ).append( "<div class='bar' style='width:"+width+"px; margin-top:"+top+"px; background-color:#BDBDBD; border:1px solid black'>" + abbreviation + "</div>" );
     $(".bar:nth-child("+(index+2)+")").animate({ height: "" + height + "px"}, 800);
      $("tr:nth-child("+(index+2)+") .barCount").css('font-weight', 'bold');
     
@@ -135,8 +138,8 @@ function genBarChart() {
     if(index >= data.length) {
         console.log("exiting loop");
        
-    clearInterval(intervalID2);
-  }
+		clearInterval(intervalID2);
+	}
     index++;
   }, 800);
 }
