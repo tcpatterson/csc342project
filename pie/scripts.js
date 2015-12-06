@@ -2,22 +2,22 @@ $( "#weHaveAWinner" ).click(function() {
   alert( "Money falling from the sky." );
 });
 
-var data = [{"JobTitle":"Monday I","Count":12},
-{"JobTitle":"Tuesday","Count":6},
-{"JobTitle":"Wednesday","Count":8},
-{"JobTitle":"Thursday","Count":9},
-{"JobTitle":"Friday","Count":6},
-{"JobTitle":"Saturday","Count":11},
-{"JobTitle":"Sunday","Count":9}];
+var data = [{"Key":"Monday","Value":12},
+{"Key":"Tuesday","Value":6},
+{"Key":"Wednesday","Value":8},
+{"Key":"Thursday","Value":9},
+{"Key":"Friday","Value":6},
+{"Key":"Saturday","Value":11},
+{"Key":"Sunday","Value":9}];
 
 $( "#read" ).click(function() {
 	$("table").empty();
 	$( "table" ).append( "<th>Number of inches of rain per day</th>" );
 	$( "table" ).append( "<tr><td>" + "<u>Day</u>" + "</td><td>" + "<u>Inches</u>" + "</td></tr>" );
   data.forEach( function(element, index, array) {
-		//if(index == 1){alert(element.JobTitle)};
+		//if(index == 1){alert(element.Key)};
 		if(index <= 17){
-			var string = "<tr><td>" + element.JobTitle + "</td><td class='barCount'>" + element.Count + "</td></tr>";
+			var string = "<tr><td>" + element.Key + "</td><td class='barCount'>" + element.Value + "</td></tr>";
 			$( "table" ).append(string);
 
 		};
