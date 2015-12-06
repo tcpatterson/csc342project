@@ -2,8 +2,9 @@ $( "#weHaveAWinner" ).on('click', toggleSidebar);
 $( "#read" ).on('click', readLineData);
 $( "#clear" ).on('click', clearLine);
 $( "#genChart" ).on('click', genLineChart);
+$( "#changeWidth" ).on('click', resizeLine);
 $("#bar").click(function(){
-  $('#changeWidth').removeClass('hide');
+  $('#changeWidthSpan').removeClass('hide');
   $( "#read" ).unbind();
   $( "#clear" ).unbind();
   $( "#genChart" ).unbind();
@@ -14,18 +15,18 @@ $("#bar").click(function(){
   $( "#genChart" ).on('click', genBarChart);
 })
 $("#line").click(function(){
-  $('#changeWidth').removeClass('hide');
+  $('#changeWidthSpan').removeClass('hide');
   $( "#read" ).unbind();
   $( "#clear" ).unbind();
   $( "#genChart" ).unbind();
   $( "#changeWidth" ).unbind();
-  $( "#changeWidth" ).on('click', resizeBar);
+  $( "#changeWidth" ).on('click', resizeLine);
   $( "#read" ).on('click', readLineData);
   $( "#clear" ).on('click', clearLine);
   $( "#genChart" ).on('click', genLineChart);
 })
 $("#pie").click(function(){
-  $('#changeWidth').addClass('hide');
+  $('#changeWidthSpan').addClass('hide');
   $( "#read" ).unbind();
   $( "#clear" ).unbind();
   $( "#genChart" ).unbind();
@@ -132,6 +133,7 @@ function resizeLine() {
     $("#graph").css("width", newWidth + "px");
     $(".charts").css("width", (newWidth + 460) + "px");
   }
+  genLineChart();
 }
 function resizeBar() {
   var newWidth = parseInt($("#width").val(), 10);
