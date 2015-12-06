@@ -51,7 +51,7 @@ $( "#moveData" ).click(function() {
   }
   var width;
   var intervalID2 = setInterval(function() {
-    width = ((400 - 20)/data2.length) - 2;
+    width = ((parseInt($("#graph").css("width"), 10) - 20)/data2.length) - 2;
     var height = data[index].Count * scale;
     var top = 400 - height;
     $( "#ghost" ).append( "<div class='lines' style='width: 2 px; margin-top: -180px;  background-color:#BDBDBD; border:1px solid black'></div>" );  
@@ -68,4 +68,15 @@ $( "#moveData" ).click(function() {
 	}
     index++;
   }, 800);
+});
+
+$("#changeWidth").click(function() {
+  var newWidth = parseInt($("#width").val(), 10);
+  console.log($("#width").val());
+  if (newWidth > 10 && newWidth < 10000) {
+    var change =  {'width' : (((newWidth - 20)/data.length) - 2)};
+    $(".bar").animate(change, 1000, function(){});
+    $("#graph").css("width", newWidth + "px");
+    $(".charts").css("width", (newWidth + 460) + "px");
+  }
 });
