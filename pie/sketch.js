@@ -7,23 +7,23 @@ function setup() {
   noLoop();
 }
 
-var data = [{"JobTitle":"Monday I","Count":12},
-{"JobTitle":"Tuesday","Count":6},
-{"JobTitle":"Wednesday","Count":8},
-{"JobTitle":"Thursday","Count":9},
-{"JobTitle":"Friday","Count":6},
-{"JobTitle":"Saturday","Count":11},
-{"JobTitle":"Sunday","Count":9}];
+var data = [{"Key":"Monday I","Value":12},
+{"Key":"Tuesday","Value":6},
+{"Key":"Wednesday","Value":8},
+{"Key":"Thursday","Value":9},
+{"Key":"Friday","Value":6},
+{"Key":"Saturday","Value":11},
+{"Key":"Sunday","Value":9}];
 
 //var angles = [ 30, 10, 45, 35, 60, 38, 75, 67 ];
 var index = 0;
 var total = 0;
 data.forEach(function(element, index, array) {
-	total = total + element.Count;
+	total = total + element.Value;
 });
 var percentages = [];
 data.forEach(function(element, index, array) {
-	percentages.push(element.Count/total);
+	percentages.push(element.Value/total);
 });
 var angles = [];
 data.forEach(function(element, index, array) {
@@ -47,8 +47,8 @@ function drawPieces() {
 }
 
 function drawPiece() {
-  $('tr:nth-child('+(index+1)+') .barCount').css('font-weight', '');
-  $('tr:nth-child('+(index+2)+') .barCount').css('font-weight', 'bold');
+  $('tr:nth-child('+(index+1)+') .barValue').css('font-weight', '');
+  $('tr:nth-child('+(index+2)+') .barValue').css('font-weight', 'bold');
   diameter = 300;
   i = index;
   var rand = Math.random();
