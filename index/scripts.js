@@ -7,6 +7,8 @@ $("#bar").click(function(){
   $( "#read" ).unbind();
   $( "#clear" ).unbind();
   $( "#genChart" ).unbind();
+  $( "#changeWidth" ).unbind();
+  $( "#changeWidth" ).on('click', resizeBar);
   $( "#read" ).on('click', readBarData);
   $( "#clear" ).on('click', clearBar);
   $( "#genChart" ).on('click', genBarChart);
@@ -16,6 +18,8 @@ $("#line").click(function(){
   $( "#read" ).unbind();
   $( "#clear" ).unbind();
   $( "#genChart" ).unbind();
+  $( "#changeWidth" ).unbind();
+  $( "#changeWidth" ).on('click', resizeBar);
   $( "#read" ).on('click', readLineData);
   $( "#clear" ).on('click', clearLine);
   $( "#genChart" ).on('click', genLineChart);
