@@ -57,3 +57,12 @@ button {
   width: 100px;
   height: 100px;
 }
+#width {
+  margin: 20px;
+}
+#changeWidth {
+  margin: 0px;
+}
+#data {
+  overflow-y: auto;
+}
