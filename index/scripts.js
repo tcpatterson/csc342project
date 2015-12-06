@@ -117,6 +117,29 @@ function clearBar() {
   $("#ghost").empty();
 }
 
+function resizeLine() {
+  var newWidth = parseInt($("#width").val(), 10);
+  console.log($("#width").val());
+  if (newWidth > 10 && newWidth < 10000) {
+    $("#graph").empty();
+    $("#graph").css("width", newWidth + "px");
+    $(".charts").css("width", (newWidth + 460) + "px");
+  }
+}
+function resizeBar() {
+  var newWidth = parseInt($("#width").val(), 10);
+  console.log($("#width").val());
+  if (newWidth > 10 && newWidth < 10000) {
+    var changeBar =  {'width' : (((newWidth - 20)/data.length) - 2)};
+    var changeGraph =  {'width' : newWidth};
+    var changeCharts =  {'width' : (newWidth + 460)};
+    $(".bar").animate(changeBar, 1000, function(){});
+    $("#graph").animate(changeGraph, 1000, function(){});
+    $(".charts").animate(changeCharts, 1000, function(){});
+    //.delay(2000).css("width", (newWidth + 460) + "px");
+  }
+}
+
 function genBarChart() {
   var data = barData;
   var data2 = barData2;
