@@ -36,27 +36,39 @@ function toggleSidebar() {
   }
 }
 
-var barData = [{"JobTitle":"Programmer I","Count":196},
-            {"JobTitle":"Civil Engineer","Count":216},
-            {"JobTitle":"Software Engineer IV","Count":400},
-            {"JobTitle":"Web Designer III","Count":132},
-            {"JobTitle":"Human Resources Manager","Count":88},
-            {"JobTitle":"Help Desk Technician","Count":252}];
+var barData = [{"Key":"Programmer 1","Value":196},
+{"Key":"Civil Engineer","Value":216},
+{"Key":"Software Engineer 4","Value":400},
+{"Key":"Web Designer 3","Value":132},
+{"Key":"Human Resources Manager","Value":88},
+{"Key":"Help Desk Technician","Value":252},
+{"Key":"Programmer 1","Value":196},
+{"Key":"Civil Engineer","Value":216},
+{"Key":"Software Engineer 4","Value":400},
+{"Key":"Web Designer 3","Value":132},
+{"Key":"Human Resources Manager","Value":88},
+{"Key":"Help Desk Technician","Value":252},
+{"Key":"Programmer 1","Value":196},
+{"Key":"Civil Engineer","Value":216},
+{"Key":"Software Engineer IV","Value":400},
+{"Key":"Web Designer 3","Value":132},
+{"Key":"Human Resources Manager","Value":88},
+{"Key":"Help Desk Technician","Value":252},
+{"Key":"Programmer 1","Value":196},
+{"Key":"Civil Engineer","Value":216},
+{"Key":"Software Engineer 4","Value":400},
+{"Key":"Web Designer 3","Value":132},
+{"Key":"Human Resources Manager","Value":88},
+{"Key":"Help Desk Technician","Value":252}];
 
-var barData2 = [{"JobTitle2":"Prog I"},
-             {"JobTitle2":"CE"},
-             {"JobTitle2":"SE IV"},
-             {"JobTitle2":"WD III"},
-             {"JobTitle2":"HRM"},
-             {"JobTitle2":"HDT"}];
 
-var lineData = [{"JobTitle":"Monday","Count":12},
-             {"JobTitle":"Tuesday","Count":6},
-             {"JobTitle":"Wednesday","Count":8},
-             {"JobTitle":"Thursday","Count":9},
-             {"JobTitle":"Friday","Count":6},
-             {"JobTitle":"Saturday","Count":11},
-             {"JobTitle":"Sunday","Count":9}];
+var lineData = [{"Key":"Monday","Value":12},
+{"Key":"Tuesday","Value":6},
+{"Key":"Wednesday","Value":8},
+{"Key":"Thursday","Value":9},
+{"Key":"Friday","Value":6},
+{"Key":"Saturday","Value":11},
+{"Key":"Sunday","Value":9}];
 
 var pieData = [{"JobTitle":"Monday I","Count":12},
             {"JobTitle":"Tuesday","Count":6},
