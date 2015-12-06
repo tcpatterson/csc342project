@@ -104,7 +104,7 @@ function readBarData() {
   data.forEach( function(element, index, array) {
     //if(index == 1){alert(element.JobTitle)};
     if(index <= 17){
-      var string = "<tr><td>" + element.JobTitle + "</td><td class='barCount'>" + element.Count + "</td></tr>";
+      var string = "<tr><td>" + element.Key + "</td><td class='barCount'>" + element.Value + "</td></tr>";
       $( "table" ).append(string);
 
     }
@@ -164,7 +164,7 @@ function readLineData() {
   data.forEach( function(element, index, array) {
     //if(index == 1){alert(element.JobTitle)};
     if(index <= 17){
-      var string = "<tr><td>" + element.JobTitle + "</td><td class='barCount'>" + element.Count + "</td></tr>";
+      var string = "<tr><td>" + element.Key + "</td><td class='barCount'>" + element.Value + "</td></tr>";
       $( "table" ).append(string);
     };
   });
