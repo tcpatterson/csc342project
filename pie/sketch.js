@@ -57,7 +57,15 @@ function drawPiece() {
   //fill(gray);
   fill(gray, gray, 100);
   arc(width/2, height/2, diameter, diameter, lastAngle, lastAngle+radians(angles[i]));
-  lastAngle += radians(angles[i]);
+ 
+  
+  console.log( lastAngle+radians(angles[i]));
+  
+ 
+  
+  console.log('\n');
+  text("hello world", width/2 + cos ((lastAngle+radians(angles[i])) )* (diameter / 2), height/2 +(sin (lastAngle+radians(angles[i]))) * (diameter/2) , 50 , 50);
+  lastAngle += radians(angles[i]); 
   index++;
   if(index==data.length){
     clearInterval(timeoutID);
