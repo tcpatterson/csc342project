@@ -168,16 +168,16 @@ function genLineChart() {
   $("#graph").empty();
   var multiplier = 400/12;
   var index = 0;
-  var width = 400/data.length;
+  var width = parseInt($("#graph").css("width"), 10)/data.length;
   var leftmargin = 2*(width-7)/3;
   var rightmargin = (width -7)/3;
   data.forEach( function(element, index, array) {
-    $( "#graph" ).append( "<div class='dots' style='margin-left:"+leftmargin+"px;margin-right:"+rightmargin+"px;width:5px;height:5px;background-color:black;border:1px solid gray; top:394px;'>&nbsp;&nbsp;" + element.JobTitle.substring(0, 2) + "</div>" );
+    $( "#graph" ).append( "<div class='dots' style='margin-left:"+leftmargin+"px;margin-right:"+rightmargin+"px;width:5px;height:5px;background-color:black;border:1px solid gray; top:394px;'>&nbsp;&nbsp;" + element.Key.substring(0, 2) + "</div>" );
   });
   
-  var max = data[0].Count;
+  var max = data[0].Value;
   for (var i = 0; i < data.length; i++){
-    if (data[i].Count > max) max = data[i].Count;
+    if (data[i].Value > max) max = data[i].Value;
   }
   var scale = 400/max;
   $( "#graph" ).append( "<div id='yaxis' style='width: 20px; height: 400px'></div>" );
@@ -186,27 +186,27 @@ function genLineChart() {
     $("#yaxis").append("<div id='y' style='width: 20px; height: 80px'>" + (q*piece).toFixed(2) + "</div>");
   }
   var intervalID2 = setInterval(function() {
-    var top = 400 - (data[index].Count * (multiplier-1));
+    var top = 400 - (data[index].Value * (multiplier-1));
     $(".dots:nth-child("+(index+1)+")").animate({
       "top": top
     },{duration:1000,
       start: function() {
         console.log('start', index);
-        $("tr:nth-child("+(index+2)+") .barCount").css('font-weight', 'bold');
+        $("tr:nth-child("+(index+2)+") .barValue").css('font-weight', 'bold');
       },
       done: function(){
         console.log('end', index);
         if(index == data.length) {
           drawLines();
         }
-        $("tr:nth-child("+(index+0)+") .barCount").css('font-weight', '');
+        $("tr:nth-child("+(index+0)+") .barValue").css('font-weight', '');
       }
     });
     console.log(index, data.length);
     if(index == data.length-1) {
       console.log("cleared");
-      clearInterval(intervalID2);
-    }
+			clearInterval(intervalID2);
+		}
     index++;
   }, 800);
 }
