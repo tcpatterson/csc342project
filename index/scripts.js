@@ -289,9 +289,8 @@ function draw() {
 }
 
 function drawLines(){
-  var data = lineData;
   var index2 = 0;
-  var width = 400/data.length;
+  var width = parseInt($("#graph").css("width"), 10)/data.length;
   var leftmargin = 2*(width-7)/3;
   var rightmargin = (width-7)/3;
   var intervalID3 = setInterval(function() {
