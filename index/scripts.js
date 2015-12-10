@@ -13,6 +13,10 @@ $("#bar").click(function(){
   $( "#read" ).on('click', readBarData);
   $( "#clear" ).on('click', clearBar);
   $( "#genChart" ).on('click', genBarChart);
+  toggleSidebar();
+  clearBar();
+  $("#graph").animate({'width' : 400}, 1000, function(){});
+  $(".charts").animate({'width' : 860}, 1000, function(){});
 })
 $("#line").click(function(){
   $('#changeWidthSpan').removeClass('hide');
@@ -24,6 +28,10 @@ $("#line").click(function(){
   $( "#read" ).on('click', readLineData);
   $( "#clear" ).on('click', clearLine);
   $( "#genChart" ).on('click', genLineChart);
+  toggleSidebar();
+  clearBar();
+  $("#graph").animate({'width' : 400}, 1000, function(){});
+  $(".charts").animate({'width' : 860}, 1000, function(){});
 })
 $("#pie").click(function(){
   $('#changeWidthSpan').addClass('hide');
@@ -33,6 +41,10 @@ $("#pie").click(function(){
   $( "#read" ).on('click', readPieData);
   $( "#clear" ).on('click', clearPie);
   $( "#genChart" ).on('click', genPieChart);
+  toggleSidebar();
+  clearBar();
+  $("#graph").animate({'width' : 400}, 1000, function(){});
+  $(".charts").animate({'width' : 860}, 1000, function(){});
 })
 
 function toggleSidebar() {
@@ -78,23 +90,23 @@ var lineData = [{"Key":"Monday","Value":12},
 {"Key":"Saturday","Value":11},
 {"Key":"Sunday","Value":9}];
 
-var pieData = [{"JobTitle":"Monday I","Count":12},
-            {"JobTitle":"Tuesday","Count":6},
-            {"JobTitle":"Wednesday","Count":8},
-            {"JobTitle":"Thursday","Count":9},
-            {"JobTitle":"Friday","Count":6},
-            {"JobTitle":"Saturday","Count":11},
-            {"JobTitle":"Sunday","Count":9}];
+var pieData = [{"Key":"Monday","Value":12},
+{"Key":"Tuesday","Value":6},
+{"Key":"Wednesday","Value":8},
+{"Key":"Thursday","Value":9},
+{"Key":"Friday","Value":6},
+{"Key":"Saturday","Value":11},
+{"Key":"Sunday","Value":9}];
 
 var index = 0;
+var ready;
 var total = 0;
-var ready=0;
 pieData.forEach(function(element, index, array) {
-  total = total + element.Count;
+  total = total + element.Value;
 });
 var percentages = [];
 pieData.forEach(function(element, index, array) {
-  percentages.push(element.Count/total);
+  percentages.push(element.Value/total);
 });
 var angles = [];
 pieData.forEach(function(element, index, array) {
@@ -136,6 +148,7 @@ function resizeLine() {
   genLineChart();
 }
 function resizeBar() {
+  var data = barData;
   var newWidth = parseInt($("#width").val(), 10);
   console.log($("#width").val());
   if (newWidth > 10 && newWidth < 10000) {
@@ -186,7 +199,7 @@ function genBarChart() {
 		clearInterval(intervalID2);
 	}
     
-  }, 800);
+  }, 80);
 }
 
 function readLineData() {
@@ -262,9 +275,9 @@ function readPieData() {
   $( "table" ).append( "<th>Number of inches of rain per day</th>" );
   $( "table" ).append( "<tr><td>" + "<u>Day</u>" + "</td><td>" + "<u>Inches</u>" + "</td></tr>" );
   data.forEach( function(element, index, array) {
-    //if(index == 1){alert(element.JobTitle)};
+    //if(index == 1){alert(element.Key)};
     if(index <= 17){
-      var string = "<tr><td>" + element.JobTitle + "</td><td class='barCount'>" + element.Count + "</td></tr>";
+      var string = "<tr><td>" + element.Key + "</td><td class='barCount'>" + element.Value + "</td></tr>";
       $( "table" ).append(string);
 
     };
@@ -279,6 +292,10 @@ function clearPie() {
 }
 
 function genPieChart() {
+  var myCanvas = createCanvas(400, 400);
+  myCanvas.parent('graph');
+  noStroke();
+  ready = 0;
   loop();
 }
 
@@ -348,6 +365,7 @@ function drawPieces() {
 }
 
 function drawPiece() {
+  var data = pieData;
   $('tr:nth-child('+(index+1)+') .barCount').css('font-weight', '');
   $('tr:nth-child('+(index+2)+') .barCount').css('font-weight', 'bold');
   diameter = 300;
@@ -358,30 +376,25 @@ function drawPiece() {
   //fill(gray);
   fill(gray, gray, 100);
   arc(width/2, height/2, diameter, diameter, lastAngle, lastAngle+radians(angles[i]));
-  console.log(lastAngle);
-  if(lastAngle > 0 && lastAngle < 1.57) {
-    var xmult = 1;
-    var ymult = -1;
+  console.log( lastAngle+radians(angles[i]));
+  var adjustx;
+  var adjusty;
+  if (lastAngle+radians(angles[i]) > (Math.PI/2) && lastAngle+radians(angles[i]) < (3*Math.PI/2)) {
+    adjustx = sin((lastAngle+radians(angles[i]))/2) * 50;
+  } else if (lastAngle+radians(angles[i]) > (3*Math.PI/2) && lastAngle+radians(angles[i]) < (2*Math.PI)) {
+    adjustx = -1 * cos((lastAngle+radians(angles[i]))) * 20;
+  } else {
+    adjustx = 0
   }
-  if(lastAngle > 1.57 && lastAngle < 3.14) {
-    var xmult = -1;
-    var ymult = -1;
+  if (lastAngle+radians(angles[i]) > (Math.PI) && lastAngle+radians(angles[i]) < (2*Math.PI)) {
+    adjusty = sin((lastAngle+radians(angles[i]))) * 50;
+  } else {
+    adjusty = 0;
   }
-  if(lastAngle > 3.14 && lastAngle < 4.71) {
-    var xmult = -1;
-    var ymult = 1;
-  }
-  if(lastAngle > 4.73 && lastAngle < 6.28) {
-    var xmult = 1;
-    var ymult = 1;
-  }
-  var ang = angles[i];
-  var xoff = Math.cos(ang)*(diameter/1.8);
-  var yoff = Math.sin(ang)*(diameter/1.8);
-  text("fweewf",(width/2)+(xoff*xmult), (height/2)+(yoff*ymult));
-  lastAngle += radians(angles[i]);
+  text(data[i].Key + ", " + (angles[i]/360*100).toFixed(2) + "%", width/2 + cos ((lastAngle+.5*radians(angles[i])) )* (diameter / 2) - adjustx, height/2 +(sin (lastAngle+.5*radians(angles[i]))) * (diameter / 2) + adjusty, 50 , 50);
+  lastAngle += radians(angles[i]); 
   index++;
-  if(index==pieData.length){
+  if(index==data.length){
     clearInterval(timeoutID);
   }
 }
