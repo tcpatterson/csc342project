@@ -1,0 +1,50 @@
+#header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+#gra-d1 {
+   
+    background: -webkit-linear-gradient(#BDBDBD, black); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#BDBDBD, black); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#BDBDBD, black); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#BDBDBD, black); /* Standard syntax (must be last) */
+}
+
+
+.charts {
+  width: 848px;
+  height: 400px;
+  margin: 0 auto;
+}
+
+.charts div{
+  margin-left: 10px;
+  margin-right: 10px;
+  display: inline;
+  width: 400px;
+  height: 400px;
+  border: 2px solid black;
+  float: left;
+}
+
+.buttons {
+  width: 346px;
+  margin: 0 auto;
+}
+
+button {
+  height: 40px;
+}
+
+.buttons button {
+  margin: 20px;
+}
+
+.victory {
+  margin: auto;
+  right: 0;
+  left: 0;
+  width: 100px;
+  height: 100px;
+}
